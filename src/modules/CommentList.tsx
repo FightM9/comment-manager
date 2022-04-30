@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { baseURL } from '../api/config';
 import { Comment, Loader } from '../components';
+import { fakeData } from '../fakeData';
 import { useCommentFetch } from '../hooks/comment';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { addComment, toggleFavorite } from '../store/reducer/comment';
@@ -13,9 +14,13 @@ const CommentList = () => {
   );
   const { status, comments: userComments } = useCommentFetch(baseURL, lastId);
 
+  useEffect(()=> {
+    dispath(addComment(fakeData));
+  }, [])
+
   useEffect(() => {
     dispath(addComment(userComments));
-  }, [userComments, dispath]);
+  }, [userComments]);
 
   const toggle = (id: string): void => {
     dispath(toggleFavorite(id));
