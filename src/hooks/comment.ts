@@ -45,7 +45,7 @@ export const useCommentFetch = (
     };
 
     fetchData();
-  }, [url, update, id]);
+  }, [url, update]);
 
   return { status, comments };
 };
