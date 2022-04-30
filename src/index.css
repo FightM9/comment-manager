@@ -1,0 +1,31 @@
+@import-normalize;
+
+:root {
+  --primary-color: #2F80ED;
+  --primary-hover-color: #2c79de;
+  --background-color: #F2F2F2;
+  --text-color: #333333;
+  --text-caption-color: #808080;
+  --navbar-color: #333333;
+  --navbar-hover-color: #3e3e3e;
+  --card-background-color: #ffffff;
+  --drop-shadow: 0 0.125rem 1rem rgba(27, 40, 50, 0.04),0 0.125rem 2rem rgba(27, 40, 50, 0.08),0 0 0 0.0625rem rgba(27, 40, 50, 0.024);
+}
+
+html, 
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+  min-width: 320px;
+  height: 100%;
+  color: var(--text-color);
+}
