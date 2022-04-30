@@ -14,9 +14,8 @@ const Setting = () => {
         <Form>
           <legend>Sort order</legend>
           <select
-            value={sort === 'ASC' ? 0 : 1}     
-            // @ts-ignore
-            onChange={(e => dispath(setSort(evt.target.value)))}
+          // value={sort === 'ASC' ? 0 : 1}
+          // onChange={(e => dispath(setSort(evt.target.value)))}
           >
             <option value='ASC'>Ascending</option>
             <option value='DESC'>Descending</option>
