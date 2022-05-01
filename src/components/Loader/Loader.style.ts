@@ -2,7 +2,7 @@ import styled, { keyframes } from 'styled-components';
 
 export const Wraper = styled.div`
   position: fixed;
-  right: 0.5rem;
+  left: 1.2rem;
   bottom: 0.5rem;
   z-index: 100;
 `;
@@ -24,9 +24,9 @@ export const Spiner = styled.div`
   position: relative;
   text-indent: -9999em;
   border-radius: 50%;
-  border-top: 0.3rem solid #2c79de2c;
-  border-right: 0.3rem solid #2c79de2c;
-  border-bottom: 0.3rem solid #2c79de2c;
+  border-top: 0.3rem solid #F2F2F27d;
+  border-right: 0.3rem solid #F2F2F27d;
+  border-bottom: 0.3rem solid #F2F2F27d;
   border-left: 0.3rem solid #2c79de;
   transform: translateZ(0);
   animation: ${rotate} 1.1s infinite linear;
