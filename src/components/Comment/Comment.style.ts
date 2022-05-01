@@ -5,6 +5,7 @@ export const CommentCard = styled.article`
   padding: 1rem;
   background-color: var(--card-background-color);
   border-radius: 1px;
+  overflow: hidden;
 `;
 
 export const CommentWraper = styled.div`
