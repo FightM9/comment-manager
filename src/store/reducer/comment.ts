@@ -13,14 +13,14 @@ interface CommentState {
   comments: CommentType[];
   lastId: string | number;
   favorites: string[];
-  sort: 'DESC' | 'ASC';
+  sort: string;
 }
 
 const initialState = {
   comments: [],
   lastId: '0',
   favorites: [],
-  sort: 'DESC',
+  sort: 'ASC',
 } as CommentState;
 
 export const commentSlice = createSlice({
@@ -31,12 +31,18 @@ export const commentSlice = createSlice({
       state.comments = action.payload;
       state.lastId = getLastId(state.comments);
     },
-    setSort: (state, action) => {
+    setSort: (state, action: PayloadAction<string>) => {
       state.sort = action.payload;
     },
     addComment: (state, action) => {
       state.comments = [...state.comments, ...action.payload];
       state.lastId = getLastId(state.comments);
+
+      // Sort comment
+      const sorted = state.comments.sort(
+        (a, b) => parseInt(a.id) - parseInt(b.id)
+      );
+      state.comments = state.sort === 'DESC' ? sorted.reverse() : sorted;
     },
     toggleFavorite: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.includes(action.payload)
