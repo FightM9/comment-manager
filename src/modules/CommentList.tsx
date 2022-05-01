@@ -12,15 +12,15 @@ const CommentList = () => {
   const { comments, favorites, lastId } = useAppSelector(
     (state) => state.commentReducer
   );
-  const { status, comments: userComments } = useCommentFetch(baseURL, lastId);
+  const { status, comments: userComments } = useCommentFetch(baseURL, lastId, 5000);
 
   useEffect(()=> {
     dispath(addComment(fakeData));
-  }, [])
+  }, [dispath])
 
   useEffect(() => {
     dispath(addComment(userComments));
-  }, [userComments]);
+  }, [userComments, dispath]);
 
   const toggle = (id: string): void => {
     dispath(toggleFavorite(id));
