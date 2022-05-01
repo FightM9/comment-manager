@@ -1,6 +1,6 @@
 # Comment Manager
 
-
+![preview](./assets/demo.gif)
 
 ## Возможности
 
