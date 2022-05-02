@@ -1,13 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CommentType } from '../../api/config';
-
-const getLastId = (comment: CommentType[]) => {
-  return comment?.reduce(
-    (max, comment) =>
-      Number(comment.id) > max ? (max = Number(comment.id)) : max,
-    0
-  );
-};
+import { removeDuplicatesById } from '../../helpers';
 
 interface CommentState {
   comments: CommentType[];
@@ -28,26 +21,31 @@ export const commentSlice = createSlice({
   initialState,
   reducers: {
     setComment: (state, action) => {
-      state.comments = action.payload;
-      state.lastId = getLastId(state.comments);
+      state.comments = action.payload;            
     },
     setSort: (state, action: PayloadAction<string>) => {
       state.sort = action.payload;
     },
     addComment: (state, action) => {
-      const newComments = [...state.comments, ...action.payload];
+      let newComments = [...state.comments, ...action.payload];
 
-      // Sort comment
-      let sorted = newComments.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+      if (newComments.length) {  
+ 
+        // Sort comment. Remove Duplicate.
+        newComments = removeDuplicatesById(newComments.sort(
+          (a, b) => parseInt(a.id) - parseInt(b.id)
+        ));       
 
-      // Total comment limit. Remove old.
-      if (sorted.length > 50) {
-        sorted = sorted.slice(0, -50);
+        state.lastId = newComments[newComments.length - 1].id;
+
+        // Total comment limit. Remove old.
+        if (newComments.length > 50) {
+          newComments = newComments.slice(0, -50);
+        }
+
+        // Set sort order
+        state.comments = state.sort === 'DESC' ? newComments.reverse() : newComments;
       }
-
-      // Sort order
-      state.comments = state.sort === 'DESC' ? sorted.reverse() : sorted;
-      state.lastId = getLastId(state.comments);
     },
     toggleFavorite: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.includes(action.payload)

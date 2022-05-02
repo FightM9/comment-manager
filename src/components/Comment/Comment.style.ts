@@ -1,4 +1,14 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const fade = keyframes`
+from  {   
+  opacity: 0;
+  }
+  to {  
+    opacity: 1;
+  }
+}
+`;
 
 export const CommentCard = styled.article`
   display: flex;
@@ -6,6 +16,8 @@ export const CommentCard = styled.article`
   background-color: var(--card-background-color);
   border-radius: 1px;
   overflow: hidden;
+  animation: ${fade} 1s;
+
 `;
 
 export const CommentWraper = styled.div`
