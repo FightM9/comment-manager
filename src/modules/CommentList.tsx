@@ -9,14 +9,12 @@ import { List } from '../style/List';
 
 const CommentList = () => {
   const dispath = useAppDispatch();
-  const { comments, favorites, lastId } = useAppSelector(
-    (state) => state.commentReducer
-  );
-  const { status, comments: userComments } = useCommentFetch(baseURL, lastId, 5000);
+  const { comments, favorites, lastId } = useAppSelector((state) => state.commentReducer);
+  const { status, comments: userComments } = useCommentFetch(baseURL,lastId,5000 );
 
-  useEffect(()=> {
+  useEffect(() => {
     dispath(addComment(fakeData));
-  }, [dispath])
+  }, [dispath]);
 
   useEffect(() => {
     dispath(addComment(userComments));
@@ -35,7 +33,7 @@ const CommentList = () => {
       {status ? <Loader /> : null}
       <List>
         {comments?.map((comment) => (
-          <li key={Math.random().toString()}>
+          <li key={comment.date.toString() + comment.id}>
             <Comment
               id={comment.id}
               date={new Date(comment.date)}
