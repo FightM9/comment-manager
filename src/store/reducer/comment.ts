@@ -40,7 +40,7 @@ export const commentSlice = createSlice({
 
         // Total comment limit. Remove old.
         if (newComments.length > 50) {
-          newComments = newComments.slice(0, -50);
+          newComments = newComments.slice(-50);
         }
 
         // Set sort order
