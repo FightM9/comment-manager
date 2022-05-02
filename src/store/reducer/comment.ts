@@ -35,14 +35,19 @@ export const commentSlice = createSlice({
       state.sort = action.payload;
     },
     addComment: (state, action) => {
-      state.comments = [...state.comments, ...action.payload];
-      state.lastId = getLastId(state.comments);
+      const newComments = [...state.comments, ...action.payload];
 
       // Sort comment
-      const sorted = state.comments.sort(
-        (a, b) => parseInt(a.id) - parseInt(b.id)
-      );
+      let sorted = newComments.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+
+      // Total comment limit. Remove old.
+      if (sorted.length > 50) {
+        sorted = sorted.slice(0, -50);
+      }
+
+      // Sort order
       state.comments = state.sort === 'DESC' ? sorted.reverse() : sorted;
+      state.lastId = getLastId(state.comments);
     },
     toggleFavorite: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.includes(action.payload)
