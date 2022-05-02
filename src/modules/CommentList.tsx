@@ -33,7 +33,7 @@ const CommentList = () => {
       {status ? <Loader /> : null}
       <List>
         {comments?.map((comment) => (
-          <li key={comment.date.toString() + comment.id}>
+          <li key={comment.id}>
             <Comment
               id={comment.id}
               date={new Date(comment.date)}
